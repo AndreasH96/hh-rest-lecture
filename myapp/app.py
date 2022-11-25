@@ -34,7 +34,6 @@ def addUser():
     schema = UserSchema()
     try:
         # Validate request body against schema data types
-        
         result = schema.load(request_data)
     except ValidationError as err:
         # Return a nice message if validation fails
