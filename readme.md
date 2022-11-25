@@ -4,9 +4,9 @@ This repo is for showing basic API development for a lecture at Halmstad Univers
 
 *   API Endpoints
 *   Schema validation
-*   Testing and precommit hooks
+*   Testing and pre-commit hooks
 
-This basic API is built in python with [Flask](https://flask.palletsprojects.com/en/2.2.x/)
+This basic API is built in python with [FastAPI](https://fastapi.tiangolo.com/)
 
 To run :
     

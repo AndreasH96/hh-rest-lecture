@@ -3,9 +3,7 @@ from fastapi.testclient import TestClient
 from .main import application
 import json
 
-
 client = TestClient(application)
-
 
 def test_getUserIds_empty():
     response = client.get("/")

@@ -29,7 +29,6 @@ def getUser(uid:str):
 
 @application.post("/",status_code=201)
 def addUser(user: UserSchema):
-
     #Since we validated the body, we know that user.name is a string at all times
     db[user.name.lower()] = user
 
