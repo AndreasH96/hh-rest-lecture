@@ -10,7 +10,7 @@ This basic API is built in python with [FastAPI](https://fastapi.tiangolo.com/)
 
 To run :
     
-        flask -app myapp/app run
+        uvicorn app.main:application
 
 Uses [pre-commit](https://pre-commit.com/#intro) in order to perform tests before a commit is approved. 
 You might need to run `pre-commit install` to set it up (and install pre-commit of course).
