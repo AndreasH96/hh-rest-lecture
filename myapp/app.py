@@ -1,7 +1,6 @@
-from flask import jsonify, request
+from flask import jsonify, request, Flask
 from marshmallow import Schema, fields, ValidationError
 from dotenv import load_dotenv
-from . import create_app
 import os
 
 
@@ -13,7 +12,7 @@ class UserSchema(Schema):
 load_dotenv()
 port = os.getenv('PORT') if  os.getenv('PORT') else 5000
 db = {}
-application = create_app()
+application = Flask(__name__)
 
 
 
@@ -68,4 +67,5 @@ def deleteUser(uid):
     return "Success", 200
 
 if __name__ == "__main__":
-  application.run(host="localhost",port=port)
+    print("HEJ")
+    application.run(host="localhost",port=port)
