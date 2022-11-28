@@ -1,0 +1,107 @@
+<html>
+<style>
+    h1{
+        padding-left: 20;
+    }
+    body{
+        background-color:#efeadc ;
+        color:#3c3c3a;
+    }
+    th {
+        padding-left: 20;
+        padding-right: 20;
+
+    }
+
+    td {
+        padding-left: 20;
+        padding-right: 20;
+        align-content: center;
+    }
+    form{
+        padding:20
+    
+    }
+</style>
+
+<head>
+    <title>Some HTML in here</title>
+</head>
+
+<body>
+    <h1>Our Users!</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Company</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for _, value in users.items() %}
+            <tr>
+                <td> {{ value.name }} </td>
+                <td> {{ value.age }} </td>
+                <td> {{ value.company }} </td>
+                <td><button id={{value.name}} onclick="deleteUser(this.id)">X</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <form>
+        <label for="name">First name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="age">Age</label><br>
+        <input type="number" id="age" name="age"><br>
+        <label for="company">Company</label><br>
+        <input type="text" id="company" name="company"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+<script>
+    function deleteUser(userId) {
+        fetch("http://localhost:8000/users/" + userId,
+            {
+                method: "DELETE"
+            }).then((data) => {
+                console.log(data);
+                location.reload();
+            }).catch((err) => console.log(err))
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        const data = new FormData(event.target);
+
+        const name = data.get('name');
+        const age = data.get('age')
+        const company = data.get('company')
+        const value = { name, age, company }
+
+        fetch("http://localhost:8000/users", {
+            method: "PUT",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(value)
+        }).then((data) => {
+            document.querySelector('form').reset();
+    
+            console.log(data);
+            location.reload();
+        }).catch((error) => console.log(error))
+
+
+    }
+
+    const form = document.querySelector('form');
+    form.addEventListener('submit', handleSubmit);
+
+</script>
+
+</html>
